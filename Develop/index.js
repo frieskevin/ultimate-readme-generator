@@ -1,13 +1,16 @@
 // TODO: Include packages needed for this application
 const inquirer = require('inquirer');
-const generateMarkdown = require('./utils/generateMarkdown.js');
+const generation = require('./utils/generateMarkdown.js');
+const fs = require('fs');
+const { rejects } = require('assert');
+const { resolve } = require('path');
 
 // TODO: Create an array of questions for user input
 const questions = [
     {
         type: 'input',
         name: 'title',
-        message: 'What is your project title? (Required)',
+        message: 'What is your project title?',
         validate: titleInput => {
             if (titleInput) {
                 return true;
@@ -112,7 +115,7 @@ const questions = [
         type: 'list',
         name: 'license',
         message: 'What license are you using?',
-        choices: ['GNU AGPLv3', 'GnU GPLv3', 'GNU LGPLv3', 'Mozilla Public License 2.0', 'Apache License 2.0', 'MIT License', 'Boost Software License 1.0', 'The Unlicense'],
+        choices: ['GNU AGPLv3', 'GNU GPLv3', 'GNU LGPLv3', 'Mozilla Public License 2.0', 'Apache License 2.0', 'MIT License', 'Boost Software License 1.0', 'The Unlicense', 'None'],
         validate: licenseInput => {
             if (licenseInput) {
                 return true;
@@ -120,26 +123,36 @@ const questions = [
                 console.log('Please select a license.');
                 return false;
             }
-        } 
+        }
     },
 ];
 
-//initializes prompt with questions
-const promptGo = () => {
+
+
+// TODO: Create a function to write README file
+function writeToFile(fileName, data) {
+    fs.writeFile(fileName, data, err => {
+        return new Promise((resolve, reject) => {
+            if (err) {
+                reject(err);
+                return;
+            }
+            resolve({
+                ok: true,
+                message: 'File created!'
+            });
+        })
+    });
+};
+
+// TODO: Create a function to initialize app
+function init() {
     return inquirer
         .prompt(questions)
         .then((answerData) => {
             console.log(answerData);
+            writeToFile('../dist/readme.md', generation.generateMarkdown(answerData));
         });
-};
-
-// TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
-
-// TODO: Create a function to initialize app
-function init() {
-    promptGo();
-
 };
 
 // Function call to initialize app
