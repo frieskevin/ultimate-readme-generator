@@ -151,7 +151,7 @@ function init() {
         .prompt(questions)
         .then((answerData) => {
             console.log(answerData);
-            writeToFile('../dist/readme.md', generation.generateMarkdown(answerData));
+            writeToFile('./dist/readme.md', generation.generateMarkdown(answerData));
         });
 };
 
