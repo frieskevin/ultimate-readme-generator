@@ -120,15 +120,27 @@ const questions = [
                 console.log('Please select a license.');
                 return false;
             }
-        }
+        } 
     },
 ];
+
+//initializes prompt with questions
+const promptGo = () => {
+    return inquirer
+        .prompt(questions)
+        .then((answerData) => {
+            console.log(answerData);
+        });
+};
 
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {}
 
 // TODO: Create a function to initialize app
-function init() {}
+function init() {
+    promptGo();
+
+};
 
 // Function call to initialize app
 init();
