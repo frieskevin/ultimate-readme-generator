@@ -1,3 +1,5 @@
-# Professional README Generator Starter Code
+# Ultimate README Generator
 
-[How to create a Professional README](https://coding-boot-camp.github.io/full-stack/github/professional-readme-guide)
+## This node.js project generates a professional README for you based on your input in the command line.
+
+### [Video Link}(https://drive.google.com/file/d/1KjOwxvWRsy3lgSZ7Ehk0GJykjd_3EFWH/view)
